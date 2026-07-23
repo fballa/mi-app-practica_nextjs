@@ -1,4 +1,3 @@
-// app/dashboard/components/DashboardClient.tsx
 'use client';
 
 import { useState } from 'react';
@@ -9,8 +8,7 @@ import SalesChart from './SalesChart';
 import DarkModeToggle from '@/app/components/DarkModeToggle';
 import RefreshButton from './RefreshButton';
 
-
-// El mismo tipo Product que usamos en SalesTable
+// Definimos el tipo de producto
 interface Product {
   id: number;
   title: string;
@@ -29,6 +27,16 @@ interface DashboardClientProps {
 export default function DashboardClient({ products }: DashboardClientProps) {
   const [filterText, setFilterText] = useState('');
 
+  // Verificamos que products sea un arreglo
+  if (!Array.isArray(products)) {
+    console.error('DashboardClient: products no es un arreglo', products);
+    return (
+      <div className="text-red-500 p-4">
+        Error: Los datos de productos no tienen el formato esperado.
+      </div>
+    );
+  }
+
   // Filtramos los productos según el texto de búsqueda (título)
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(filterText.toLowerCase())
@@ -40,18 +48,28 @@ export default function DashboardClient({ products }: DashboardClientProps) {
   const averagePrice = totalProducts > 0 ? totalPrice / totalProducts : 0;
 
   return (
-    <><header className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">📊 Dashboard de Ventas</h1>
+    <div>
+      <header className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+          📊 Dashboard de Ventas
+        </h1>
+        <div className="flex gap-2 items-center">
           <RefreshButton />
           <DarkModeToggle />
-      </header><div>
-              <SummaryCards
-                  totalProducts={totalProducts}
-                  totalPrice={totalPrice}
-                  averagePrice={averagePrice} />
-              <SalesChart products={products} />
-              <FilterBar onFilter={setFilterText} />
-              <SalesTable products={filteredProducts} />
-          </div></>
+        </div>
+      </header>
+
+      <SummaryCards
+        totalProducts={totalProducts}
+        totalPrice={totalPrice}
+        averagePrice={averagePrice}
+      />
+
+      <SalesChart products={products} />
+
+      <FilterBar onFilter={setFilterText} />
+
+      <SalesTable products={filteredProducts} />
+    </div>
   );
 }

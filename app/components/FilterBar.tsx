@@ -1,4 +1,3 @@
-// app/dashboard/components/FilterBar.tsx
 'use client';
 
 import { useState } from 'react';
@@ -13,7 +12,7 @@ export default function FilterBar({ onFilter }: FilterBarProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearch(value);
-    onFilter(value); // Notificamos al padre el nuevo término
+    onFilter(value);
   };
 
   return (
@@ -23,7 +22,7 @@ export default function FilterBar({ onFilter }: FilterBarProps) {
         placeholder="🔍 Buscar producto..."
         value={search}
         onChange={handleChange}
-        className="test-dark p-4"
+        className="border border-gray-300 dark:border-gray-600 bg-white  text-gray-800 dark:text-white p-2 rounded w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
     </div>
   );
