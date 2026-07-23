@@ -4,10 +4,9 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 interface Product {
   id: number;
-  title: string;
-  price: number;
   category: string;
-  rating: { rate: number; count: number };
+  price: number;
+  // ... otros campos no necesarios para el gráfico
 }
 
 interface SalesChartProps {
@@ -15,7 +14,6 @@ interface SalesChartProps {
 }
 
 export default function SalesChart({ products }: SalesChartProps) {
-  // Agrupar por categoría y calcular precio promedio
   const categoryMap = products.reduce((acc: Record<string, number[]>, product) => {
     if (!acc[product.category]) acc[product.category] = [];
     acc[product.category].push(product.price);
@@ -33,7 +31,7 @@ export default function SalesChart({ products }: SalesChartProps) {
   });
 
   return (
-    <div className="test-dark p-4">
+    <div className="bg-white  p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6">
       <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">
         📊 Precio Promedio por Categoría
       </h3>

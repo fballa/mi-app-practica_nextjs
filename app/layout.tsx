@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
+import Footer from '@/app/components/Footer'; // 👈 Importa el Footer
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <ThemeProvider theme={theme}>
           {children}
         </ThemeProvider>
+        <Footer /> {/* 👈 Agrega el Footer aquí */}
       </body>
     </html>
   );
