@@ -3,7 +3,7 @@ import DashboardClient from '../components/DashboardClient';
 
 export default async function DashboardPage() {
   try {
-    const res = await fetch('https://fakestoreapi.com/products');
+    const res = await fetch('https://dummyjson.com/products');
     if (!res.ok) throw new Error('Error al obtener productos');
     const products = await res.json();
 
